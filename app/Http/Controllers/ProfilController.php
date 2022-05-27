@@ -36,14 +36,22 @@ class ProfilController extends Controller
      */
     public function storeProfil(Request $request)
     {
+        
+        $request->validate([ 
+                'Nom' => 'required',
+            ],
+            [
+                'required'  => 'Le :attribute ne doit pas être vide.',
+            ]
+        );
         $name = $request->input('name');
 
         $profil = new Profil();
         $profil->name = $name;
-        // dd($profil);
+        dd($profil);
         $profil->save();
 
-        return view('profils.addProfil');
+        return redirect('profils')->with('message','Profil enrégistré avec succès !!!');
     }
 
     /**

@@ -28,16 +28,16 @@ Route::post('/storeCategorie',[
     'as'   => 'storeCategorie',
     'uses' => 'CategorieController@storeCategorie'
 ]);
-Route::get('/editer/{id}',[
-    'as'   => 'editer',
+Route::get('/edit_Categorie/{id}',[
+    'as'   => 'edit_Categorie',
     'uses' => 'CategorieController@editCategorie'
 ]);
-Route::post('/modifier/{id}',[
-    'as'   => 'modifier',
+Route::post('/modif_Categorie/{id}',[
+    'as'   => 'modif_Categorie',
     'uses' => 'CategorieController@updateCategorie'
 ]);
-Route::get('/supprimer/{id}',[
-    'as'   => 'supprimer',
+Route::get('/supp_Categorie/{id}',[ 
+    'as'   => 'supp_Categorie',
     'uses' => 'CategorieController@destroyCategorie'
 ]);
 // -------------------------------------Fin Categories Route----------------------------
@@ -68,6 +68,22 @@ Route::get('/supp_Produit/{id}',[
 ]);
 // -------------------------------------Fin Produits Route----------------------------
 // ----------------------------------------Commandes Route----------------------------
+Route::get('/commandes',[
+    'as'   => 'commandes',
+    'uses' => 'CommandeController@showCommande'
+]);
+Route::get('/edit_Commande/{id}',[
+    'as'   => 'edit_Commande',
+    'uses' => 'CommandeController@editCommande'
+]);
+Route::post('/modif_Commande/{id}',[
+    'as'   => 'modif_Commande',
+    'uses' => 'CommandeController@updateCommande'
+]);
+Route::get('/supp_Commande/{id}',[
+    'as'   => 'supp_Commande',
+    'uses' => 'CommandeController@destroyCommande'
+]);
 // -------------------------------------Fin Commandes Route----------------------------
 // ----------------------------------------Profils Route-------------------------------
 Route::get('/profils',[
@@ -82,18 +98,49 @@ Route::post('/storeProfil',[
     'as'   => 'storeProfil',
     'uses' => 'ProfilController@storeProfil'
 ]);
-Route::get('/editer/{id}',[
-    'as'   => 'editer',
+Route::get('/edit_Profil/{id}',[
+    'as'   => 'edit_Profil',
     'uses' => 'ProfilController@editProfil'
 ]);
-Route::post('/modifier/{id}',[
-    'as'   => 'modifier',
+Route::post('/modif_Profil/{id}',[
+    'as'   => 'modif_Profil',
     'uses' => 'ProfilController@updateProfil'
 ]);
-Route::get('/supprimer/{id}',[
-    'as'   => 'supprimer',
+Route::get('/supp_Profil/{id}',[
+    'as'   => 'supp_Profil',
     'uses' => 'ProfilController@destroyProfil'
 ]);
 // -------------------------------------Fin Profils Route----------------------------
 // ----------------------------------------Users Route----------------------------
 // -------------------------------------Fin Users Route----------------------------
+// ----------------------------------------Pubs Route----------------------------
+Route::get('/pubs',[
+    'as'   => 'pubs', 
+    'uses' => 'PubsController@showPubs'
+]);
+Route::get('/pubsTotal',[
+    'as'   => 'pubsTotal', 
+    'uses' => 'PubsController@showTotalPubs'
+]);
+Route::get('/addPub',[
+    'as'   => 'addPub',
+    'uses' => 'PubsController@createPubs'
+]);
+Route::post('/storePub',[
+    'as'   => 'storePub',
+    'uses' => 'PubsController@storePubs'
+]);
+Route::get('/editPub/{id}',[
+    'as'   => 'editPub',
+    'uses' => 'PubsController@editPubs'
+]);
+Route::post('/modifierPub/{id}',[
+    'as'   => 'modifierPub',
+    'uses' => 'PubsController@updatePubs'
+]);
+Route::get('/destroyPub/{id}',[
+    'as'   => 'destroyPub',
+    'uses' => 'PubsController@destroyPub'
+]);
+// -------------------------------------Fin Pubs Route----------------------------
+

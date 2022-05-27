@@ -38,7 +38,7 @@
                 <div class="card">
                     <h5 class="card-header">Update Profil</h5>
                     <div class="card-body">
-                        <form method="post" action="{{ url('/modifier', $profil->id )}}" id="validationform" data-parsley-validate="" novalidate="">
+                        <form method="post" action="{{ url('/modif_Profil', $profil->id )}}" id="validationform" data-parsley-validate="" novalidate="">
                             <input type="hidden" value="{{csrf_token()}}" name="_token" id="token" />
                             
                             <div class="form-group row">

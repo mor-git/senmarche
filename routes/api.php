@@ -43,3 +43,15 @@ Route::post('/apiCommande',[
     'uses'       => 'ApiCommandeController@storeCommande',
     'middleware' => 'cors'
 ]);
+
+Route::post('/apiCommande',[
+    'as'         => 'apiSaveCommande',  
+    'uses'       => 'ApiCommandeController@saveCommande',
+    'middleware' => 'cors'
+]);
+Route::get('/apiPubs',[
+    'as'         => 'apiPubs',  
+    'uses'       => 'ApiPubsController@showPubs',
+    'middleware' => 'cors'
+]);
+

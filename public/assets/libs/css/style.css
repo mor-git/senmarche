@@ -167,6 +167,19 @@
     /* background-origin: border-box; */
     background-clip: content-box, border-box;
 }
+.successValidate{
+    height : 40px; 
+    text-align : center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+.textLogo{
+    color: white;
+    padding-top: 80%;
+    font-family: 'Times New Roman bold', Georgia, serif ;
+    font-size: large;
+}
+
 .elem{
     text-align: center;
     
@@ -889,11 +902,11 @@ Background Color / Color
 }
 
 .bg-success {
-    background-color: #2ec551 !important;
+    background-color: #34C924 !important;
 }
 
 .bg-danger {
-    background-color: #ef172c !important;
+    background-color: #ef172c !important; 
 }
 
 .bg-warning {

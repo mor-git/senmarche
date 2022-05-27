@@ -36,9 +36,9 @@
             <!-- ============================================================== -->
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">
-                    <h5 class="card-header">Update Catégorie</h5>
+                    <h5 class="card-header">Modifier Catégorie</h5>
                     <div class="card-body">
-                        <form method="post" action="{{ url('/modifier', $categorie->id)}}" id="validationform" data-parsley-validate="" novalidate="">
+                        <form method="post" action="{{ url('/modif_Categorie', $categorie->id)}}" id="validationform" data-parsley-validate="" novalidate="">
                             <input type="hidden" value="{{csrf_token()}}" name="_token" id="token" />
                             
                             <div class="form-group row">

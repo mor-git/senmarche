@@ -33,10 +33,15 @@
             <!-- ============================================================== -->
             <!-- recent orders  -->
             <!-- ============================================================== -->
+            @if(session('message'))
+                <div class="alert-success successValidate">{{ session('message') }}</div>
+            @endif
+            <br>
             <div style="text-align : right; margin-right : 12px;"><a href="{{ url('/addCategorie')}}" class="btn btn-outline-success">Nouvelle Catégorie</a></div><br>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">
                     <h5 class="card-header">Liste des Catégories</h5>
+                    
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table">
@@ -54,10 +59,10 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $categorie->name }}</td>
                                         <td>
-                                            <a href="{{ url('/editer', $categorie->id) }}" >
+                                            <a href="{{ url('/edit_Categorie', $categorie->id) }}" >
                                                 <i class='fas fa-edit' style='font-size:15px;color:green;'></i>
                                             </a>&nbsp;
-                                            <a href="{{ url('/supprimer', $categorie->id ) }}" >
+                                            <a href="{{ url('/supp_Categorie', $categorie->id ) }}" >
                                                 <i class='fas fa-trash-alt' style='font-size:15px;color:red'></i>
                                             </a>
                                         </td>

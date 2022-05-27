@@ -1,16 +1,4 @@
-<!-- <div class="container">
-    <div class="row">
-        @foreach($produits as $produit)
-        <div class="col-3 elem">
-            <img class="taille" src="{{ asset('assets/images/'.$produit->legende) }}"/>
-            <p>{{ $produit->categories->name }} , {{ $produit->name }} , {{ $produit->prix }} , {{ $produit->statut }}</p>
-            
-        </div>
-        @endforeach
-    </div>
-</div> -->
 @extends('layouts.layout')
-
 @section('contenu')
 <!-- ============================================================== -->
 <!-- wrapper  -->
@@ -18,6 +6,33 @@
 <div class="dashboard-wrapper">
     <div class="dashboard-ecommerce">
         <div class="container-fluid dashboard-content ">
+            <!-- =======================Debut Modal ======================================= -->
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!-- ======================= Fin Modal ======================================= -->    
+            
             <!-- ============================================================== -->
             <!-- pageheader  -->
             <!-- ============================================================== -->
@@ -44,7 +59,11 @@
             <!-- ============================================================== -->
             <!-- recent orders  -->
             <!-- ============================================================== -->
-            <div style="text-align : right; margin-right : 12px;"><a href="{{ url('/addProduit')}}" class="btn btn-outline-success">Nouvelle Catégorie</a></div><br>
+            @if(session('message'))
+                <div class="alert-success successValidate" role="alert">{{ session('message') }}</div>
+            @endif
+            <br>
+            <div style="text-align : right; margin-right : 12px;"><a href="{{ url('/addProduit')}}" class="btn btn-outline-success">Nouveau Produit</a></div><br>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">
                     <h5 class="card-header">Liste Produits</h5>
@@ -70,15 +89,19 @@
                                         <td><img class="taille" src="{{ asset('assets/images/'.$produit->legende) }}"/></td>
                                         <!-- <td>{{ $produit->categories->name }}</td> -->
                                         <td>{{ $produit->name }}</td>
-                                        <td>{{ $produit->prix }}&nbsp;f</td>
-                                        <td>{{ $produit->statut }}</td>
-                                        
+                                        <td>{{ $produit->prix }}&nbsp;f</td> 
+                                        @if($produit->statut == 0 )
+                                            <td style="color: red">Indisponible</td>
+                                        @else
+                                            <td style="color: green">Disponible</td>
+                                        @endif
                                         <td>
                                             <a href="{{ url('edit_Produit',$produit->id) }}">
                                                 <i class='fas fa-edit' style='font-size:15px;color:green;'></i>
                                             </a>&nbsp;
-                                            <a href="{{ url('supp_Produit',$produit->id) }}">
-                                                <i class='fas fa-trash-alt' style='font-size:15px;color:red'></i>
+                                            <!-- <a href="{{ url('supp_Produit',$produit->id) }}"> -->
+                                            <a href=""  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <i class='fas fa-trash-alt' style='font-size:15px;color:red' ></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -101,8 +124,17 @@
             <!-- ============================================================== -->
             <!-- end recent orders  -->
             <!-- ============================================================== -->
+
+            <!-- =======================Debut Modal ======================================= -->
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+            </button>
+
+            
+            <!-- ======================= Fin Modal ======================================= -->
+        </div>
     </div>
-</div>
 <!-- ============================================================== -->
 <!-- end wrapper  -->
 <!-- ============================================================== -->
@@ -110,5 +142,16 @@
 <!-- ============================================================== -->
 <!-- end main wrapper  -->
 <!-- ============================================================== -->
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $('#exampleModal').click(function(e){
+                e.preventDefault();
+
+                // $(.deleteModalBtn)
+            })
+        });
+    </script>
 @endsection
     

@@ -35,14 +35,21 @@ class CategorieController extends Controller
      */
     public function storeCategorie(Request $request)
     {
-        $name = $request->input('name');
+        $request->validate([ 
+            'Nom' => 'required',
+        ],
+        [
+            'required'  => 'Le :attribute ne doit pas être vide.',
+        ]
+        );
+        $name = $request->input('Nom');
 
         $categorie = new Categorie();
         $categorie->name = $name;
         // dd($categorie);
         $categorie->save();
 
-        return view('categories.addCategorie');
+        return redirect('/categories')->with('message','Catégorie enrégistrée avec succès !!!');
     }
 
     /**
@@ -96,7 +103,7 @@ class CategorieController extends Controller
     public function destroyCategorie(Categorie $categorie, $id)
     {
         $categorie = Categorie::find($id);
-        dd($categorie);
+        // dd($categorie);
         $categorie->delete();
         return redirect('/categories');
     }

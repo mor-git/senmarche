@@ -42,9 +42,12 @@
                             <input type="hidden" value="{{csrf_token()}}" name="_token" id="token" />
                             
                             <div class="form-group row">
-                                <label class="col-12 col-sm-3 col-form-label text-sm-right">Libelle</label>
+                                <label class="col-12 col-sm-3 col-form-label text-sm-right">Nom Catégorie</label>
                                 <div class="col-12 col-sm-9 col-lg-6">
-                                    <input type="text" name="name" required="" data-parsley-maxlength="6" placeholder="Ajout d'une Catégorie." class="form-control">
+                                    <input type="text" name="Nom" required="" data-parsley-maxlength="6" placeholder="Ajout d'une Catégorie." class="form-control">
+                                    @error('Nom')
+                                    <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row text-right">

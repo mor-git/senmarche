@@ -4,7 +4,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header"> 
             <nav class="navbar navbar-expand-lg bg-success fixed-top">
-                <a  href="#"><img src="{{ asset('assets/images/valider.png')}}" alt="" style="height: 50px; weight: 50px;"><span style="color: white; padding-top: 80%;">Sen Marché</span></a>
+                <a  href="#"><img src="{{ asset('assets/images/logo.jpg')}}" alt="" style="height: 50px; weight: 50px;">&nbsp;<span class="textLogo">Sen Marché</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -75,6 +75,23 @@
                                     </ul>
                                 </div>
                             </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fab fa-fw fa-wpforms"></i>Publicitè</a>
+                                <div id="submenu-3" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ url('/addPub')}}">Add Pub</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ url('/pubs')}}">Liste Pub en Cours</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ url('/pubsTotal')}}">Liste Total Pub</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fab fa-fw fa-wpforms"></i>Commande</a>
@@ -84,26 +101,11 @@
                                             <a class="nav-link" href="{{ url('/addCategorie')}}">Ajout Commande</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ url('/addCategorie')}}">Liste Commandes</a>
+                                            <a class="nav-link" href="{{ url('/commandes')}}">Liste Commandes</a> 
                                         </li>
                                     </ul>
                                 </div>
                             </li>
-
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fab fa-fw fa-wpforms"></i>Publicitè</a>
-                                <div id="submenu-6" class="collapse submenu" style="">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ url('/addCategorie')}}">Add Pub</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ url('/addCategorie')}}">Liste Pub</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li> -->
-
 
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Paramétres</a>

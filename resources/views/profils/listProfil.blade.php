@@ -33,6 +33,10 @@
             <!-- ============================================================== -->
             <!-- recent orders  -->
             <!-- ============================================================== -->
+            @if(session('message'))
+                <div class="alert-success successValidate">{{ session('message') }}</div>
+            @endif
+            <br>
             <div style="text-align : right; margin-right : 12px;"><a href="{{ url('/addProfil')}}" class="btn btn-outline-success">Nouveau Profil</a></div><br>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">
@@ -54,10 +58,10 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $profil->name }}</td>
                                         <td>
-                                            <a href="{{ url('/editer', $profil->id) }}" >
+                                            <a href="{{ url('/edit_Profil', $profil->id) }}" >
                                                 <i class='fas fa-edit' style='font-size:15px;color:green;'></i>
                                             </a>&nbsp;
-                                            <a href="{{ url('/supprimer', $profil->id) }}" >
+                                            <a href="{{ url('/supp_Profil', $profil->id) }}" >
                                                 <i class='fas fa-trash-alt' style='font-size:15px;color:red'></i>
                                             </a>
                                         </td>

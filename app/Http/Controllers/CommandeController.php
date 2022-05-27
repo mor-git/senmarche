@@ -49,7 +49,8 @@ class CommandeController extends Controller
      */
     public function showCommande(Commande $commande)
     {
-        //
+        $commandes = Commande::paginate(3);
+        return view('commandes.listCommande',['commandes'=> $commandes]);
     }
 
     /**
@@ -58,9 +59,10 @@ class CommandeController extends Controller
      * @param  \App\Commande  $commande
      * @return \Illuminate\Http\Response
      */
-    public function editCommande(Commande $commande)
+    public function editCommande(Commande $commande, $id)
     {
-        //
+        $commande = Commande::where('user_id','=',$id)->get();
+        return view('commandes.editCommande',['commande'=> $commande ]);
     }
 
     /**
@@ -70,9 +72,13 @@ class CommandeController extends Controller
      * @param  \App\Commande  $commande
      * @return \Illuminate\Http\Response
      */
-    public function updateCommande(Request $request, Commande $commande)
+    public function updateCommande(Request $request, Commande $commande, $id)
     {
-        //
+        $param = $request->request->all();
+        dd($param);
+        $commande = Commande::find($id);
+
+        return redirect('/commandes');
     }
 
     /**
@@ -81,8 +87,12 @@ class CommandeController extends Controller
      * @param  \App\Commande  $commande
      * @return \Illuminate\Http\Response
      */
-    public function destroyCommande(Commande $commande)
+    public function destroyCommande(Commande $commande, $id)
     {
-        //
+        $commande = Commande::find($id);
+        dd($commande);
+        $commande->delete();
+
+        return redirect('/commandes');
     }
 }

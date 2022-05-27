@@ -38,8 +38,19 @@ class ProduitController extends Controller
      */
     public function storeProduit(Request $request)
     {
-        $params = $request->except(['_token']);
+        $request->validate([ 
+                'Nom' => 'required',
+                'Prix' => 'required',
+                'Catégorie' => 'required',
+            ],
+            [
+                'required'  => ':attribute ne doit pas être vide.',
+                // 'unique'    => ':attribute is already used'
+            ]
+        );
 
+        $params = $request->except(['_token']);
+    
         $produit = new Produit();
         if ($request->hasFile('image')) {
 
@@ -51,15 +62,15 @@ class ProduitController extends Controller
             $file->move(public_path('assets/images/'),$filename);
 
             $produit->legende        = $filename;
-            $produit->categorie_id   = $params['categorie'];
-            $produit->name           = $params['name'];
-            $produit->prix           = $params['prix'];
+            $produit->categorie_id   = $params['Catégorie'];
+            $produit->name           = $params['Nom'];
+            $produit->prix           = $params['Prix'];
             $produit->statut         = 0;
             // dd($produit);
             $produit->save();
         }
 
-        return redirect('/produits');
+        return redirect('/produits')->with('message','Produit enrégistré avec succès !!!');
         
     }
 
@@ -104,8 +115,8 @@ class ProduitController extends Controller
         $produit->prix = $tabs['prix'];
         $produit->categorie_id = $tabs['categorie'];
         $produit->statut = $tabs['statut'];
-
-        dd($produit);
+        $produit->update();
+        // dd($produit);
 
         return redirect('/produits');
     }
@@ -119,6 +130,9 @@ class ProduitController extends Controller
     public function destroyProduit(Produit $produit, $id)
     {
         $produit = Produit::find($id);
+        $file= $produit->legende;
+        
+        unlink(public_path() . '/assets/images/'.$file);
         $produit->delete();
 
         return redirect('/produits');

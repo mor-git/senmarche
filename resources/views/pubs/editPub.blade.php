@@ -12,14 +12,13 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                        <h2 class="pageheader-title">Produit</h2>
-                        <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                        <h2 class="pageheader-title">Publicitè </h2>
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
                                     <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Forms</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Ajout Produit</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Modifier Pub</li>
                                 </ol>
                             </nav>
                         </div>
@@ -35,58 +34,40 @@
             <!-- ============================================================== -->
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="card">
-                        <h5 class="card-header">Ajouter un Produit</h5>
+                        <h5 class="card-header">Modifier le Pub</h5>
                         <div class="card-body">
-                        
-                            <form method="post" action="{{ url('/storeProduit') }}" id="validationform" enctype="multipart/form-data">
+                            <form method="post" action="{{ url('/modifierPub',$pub->id ) }}" id="validationform" enctype="multipart/form-data">
                                 <input type="hidden" value="{{csrf_token()}}" name="_token" id="token" />
-                                <div class="form-group row">
-                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Image Produit</label>
+                                 
+                                <!-- <div class="form-group row">
+                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Image</label>
                                     <div class="col-12 col-md-5">
-                                        <input type="file" name="image" data-parsley-minlength="6" placeholder="Image." class="form-control">
-                                       
+                                        <input type="file" name="image"  value="{{ $pub->chemin }}" class="form-control">
+                                    </div>
+                                </div> -->
+                                <input type="hidden" value="{{ $pub->chemin }}" name="image" />
+                                <div class="form-group row">
+                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Libelle Pub</label>
+                                    <div class="col-12 col-md-5">
+                                        <input required="" name="libele" type="text"  value="{{ $pub->libele }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Nom Produit</label>
+                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Statut</label>
                                     <div class="col-12 col-md-5">
-                                        <input name="Nom" type="text" min="1" max="100" placeholder="Nom du Produit." class="form-control">
-                                        @error('Nom')
-                                        <div class="alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Prix Produit</label>
-                                    <div class="col-12 col-md-5">
-                                        <input type="text" name="Prix"  placeholder="Prix par Kg." class="form-control">
-                                        @error('Prix')
-                                        <div class="alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Catégorie</label>
-                                    <div class="col-12 col-md-5">
-                                        <select name="Catégorie" id=""  class="form-control">
+                                        <select required="" name="statut" id=""  class="form-control">
                                             <option></option>
-                                            @foreach($categories as $categorie)
-                                                <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
-                                            @endforeach
+                                            <option value="1">Activer Publicitè</option>
+                                            <option value="0">Désactiver Publicitè</option>
                                         </select> 
-                                        @error('Catégorie')
-                                        <div class="alert-danger">{{ $message }}</div>
-                                        @enderror
                                     </div>
                                 </div>
-                            
                                 <div class="form-group row text-center">
                                     <div class="col col-md-10 offset-sm-1 offset-lg-0">
-                                        <button type="submit" class="btn btn-space btn-success">Valider</button>
+                                        <button type="submit" class="btn btn-space btn-success">Modifier</button>
                                         <button type="reset" class="btn btn-space btn-secondary">Annuler</button>
                                     </div>
                                 </div>
-                            
                             </form>
                         </div>
                     </div>
@@ -101,4 +82,6 @@
     <!-- ============================================================== -->
     <!-- end main wrapper --> 
     <!-- ============================================================== -->
+
+
 @endsection
