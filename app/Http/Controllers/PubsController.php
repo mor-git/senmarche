@@ -53,13 +53,13 @@ class PubsController extends Controller
             $file->move(public_path('assets/images/'),$filename);
 
             $pub->chemin  = $filename;
-            $pub->libele  = $param['libele'];
+            $pub->libele  = $param['Nom'];
             $pub->datePub = $now;
             $pub->statut  = 1 ;
             // dd($pub);
             $pub->save();
         }
-        return redirect('/pubs')->with('message','Pub enrégistrée avec succès !!!');
+        return redirect('/pubs')->with('messageAdd','Pub enrégistrée avec succès !!!');
     }
 
     /**
@@ -112,7 +112,7 @@ class PubsController extends Controller
         // dd($pub);
         $pub->update();
         
-        return redirect('/pubs');
+        return redirect('/pubs')->with('messageUpdate','Pub modifiée avec succès !!!');
     }
 
     /**
@@ -125,9 +125,9 @@ class PubsController extends Controller
     {
         $pub = Pubs::find($id);
         $file= $pub->chemin;
-        dd($file);
         unlink(public_path() . '/assets/images/'.$file);
         $pub->delete();
-        return redirect('/pubs');
+
+        return redirect('/pubs')->with('messageDelete','Pub supprimée avec succès !!!');
     }
 }

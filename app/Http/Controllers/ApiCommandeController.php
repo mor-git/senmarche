@@ -13,16 +13,18 @@ class ApiCommandeController extends Controller
         $tab = $request->request->all();
         $panier = $tab["all"];
         $infoClient = $tab["info"];
+        $aPayer = $tab["total"];
        
      
         $user = new User();
 
-        $user->name      = $infoClient['prenom'];
-        $user->phone     = $infoClient['phone'];
-        $user->adresse   = $infoClient['adresse'];
+        $user->name             = $infoClient['prenom'];
+        $user->phone            = $infoClient['phone'];
+        $user->adresse          = $infoClient['adresse'];
+        $user->categorieProfil  = 0;
         // $user->email     = "";
         // $user->password  = "";
-        $user->profil_id = 1;
+        $user->profil_id = 4;
         $user->save();
         foreach($panier as $item){
             $commande = new Commande();
@@ -31,6 +33,7 @@ class ApiCommandeController extends Controller
             $commande->nombre          =  $item['quantite'];
             $commande->prixProduit     =  $item['prix'];
             $commande->montantCommande =  $item['montant'];
+            $commande->aPayer          =  $aPayer;
             $commande->dateCommande    =  date("Y-m-d");
             $commande->save();
         }

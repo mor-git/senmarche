@@ -7,6 +7,31 @@
 <div class="dashboard-wrapper">
     <div class="dashboard-ecommerce">
         <div class="container-fluid dashboard-content ">
+            <!-- =======================Debut Modal ======================================= -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="deleteForm" method="GET">
+                        <input type="hidden" value="{{csrf_token()}}" name="_token" id="token" />
+                        <div class="modal-body">
+                            <!-- <input type="hidden" name="deleteProd" id="valInput"/> -->
+                            <p>Etes-vous sûr de vouloir supprimer ce profil ??</p> 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary deleteProduit">Supprimer</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+            <!-- ======================= Fin Modal ======================================= -->   
             <!-- ============================================================== -->
             <!-- pageheader  -->
             <!-- ============================================================== -->
@@ -33,8 +58,12 @@
             <!-- ============================================================== -->
             <!-- recent orders  -->
             <!-- ============================================================== -->
-            @if(session('message'))
-                <div class="alert-success successValidate">{{ session('message') }}</div>
+            @if(session('messageAdd'))
+                <div class="alert-success successValidate">{{ session('messageAdd') }}</div>
+            @elseif(session('messageUpdate'))
+                <div class="alert-success successValidate">{{ session('messageUpdate') }}</div>
+            @elseif(session('messageDelete'))
+                <div class="alert-danger successValidate">{{ session('messageDelete') }}</div>
             @endif
             <br>
             <div style="text-align : right; margin-right : 12px;"><a href="{{ url('/addProfil')}}" class="btn btn-outline-success">Nouveau Profil</a></div><br>
@@ -59,10 +88,13 @@
                                         <td>{{ $profil->name }}</td>
                                         <td>
                                             <a href="{{ url('/edit_Profil', $profil->id) }}" >
-                                                <i class='fas fa-edit' style='font-size:15px;color:green;'></i>
+                                            <button class="btnBorder"><i class='fas fa-edit' style='font-size:15px;color:green;'></i></button>
                                             </a>&nbsp;
-                                            <a href="{{ url('/supp_Profil', $profil->id) }}" >
+                                            <!-- <a href="{{ url('/supp_Profil', $profil->id) }}" >
                                                 <i class='fas fa-trash-alt' style='font-size:15px;color:red'></i>
+                                            </a> -->
+                                            <a href=""  data-toggle="modal" data-target="#exampleModal">    
+                                                <button class="lien btnBorder" value="{{ $profil->id }}"><i class='fas fa-trash-alt' style='font-size:15px;color:red'></i></button>
                                             </a>
                                         </td>
                                     </tr>
@@ -89,5 +121,18 @@
 <!-- ============================================================== -->
 <!-- end main wrapper  -->
 <!-- ============================================================== -->
+@endsection
+@section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+     $(document).ready(function(){
+         $('.lien').on('click',function(){
+            var id = $(this).val();
+            // $('#valInput').val(id);
+
+            $('#deleteForm').attr('action','/supp_Profil/'+id)
+         })
+     });
+</script>
 @endsection
     

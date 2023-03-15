@@ -30,6 +30,7 @@ class CreateCommandesTable extends Migration
             $table->decimal('nombre');
             $table->double('prixProduit');
             $table->double('montantCommande');
+            $table->double('aPayer');
             $table->date('dateCommande');
             $table->timestamps();
         });

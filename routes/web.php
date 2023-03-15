@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('welcome');
+    return view('users.loginPage');
 });
 // ----------------------------------------Categories Route----------------------------
 Route::get('/categories',[
@@ -42,6 +42,7 @@ Route::get('/supp_Categorie/{id}',[
 ]);
 // -------------------------------------Fin Categories Route----------------------------
 // ----------------------------------------Produits Route-------------------------------
+Route::get('/showProduitCategorie','ProduitController@showProduitCategorie')->name('showProduitCategorie');
 Route::get('/produits',[
     'as'   => 'produits',
     'uses' => 'ProduitController@showProduit'
@@ -52,7 +53,7 @@ Route::get('/addProduit',[
 ]);
 Route::post('/storeProduit',[
     'as'   => 'storeProduit',
-    'uses' => 'ProduitController@storeProduit'
+    'uses' => 'ProduitController@storeProduit' 
 ]);
 Route::get('/edit_Produit/{id}',[
     'as'   => 'editerProduit',
@@ -62,16 +63,18 @@ Route::post('/modif_Produit/{id}',[
     'as'   => 'modifier',
     'uses' => 'ProduitController@updateProduit'
 ]);
-Route::get('/supp_Produit/{id}',[
+Route::post('/supp_Produit',[
     'as'   => 'supprimer',
     'uses' => 'ProduitController@destroyProduit'
 ]);
 // -------------------------------------Fin Produits Route----------------------------
 // ----------------------------------------Commandes Route----------------------------
+Route::get('/recherches','CommandeController@recherche')->name('recherches');
 Route::get('/commandes',[
     'as'   => 'commandes',
     'uses' => 'CommandeController@showCommande'
 ]);
+Route::get('/detail_commande/{id}','CommandeController@indexCommande')->name('detail_commande');
 Route::get('/edit_Commande/{id}',[
     'as'   => 'edit_Commande',
     'uses' => 'CommandeController@editCommande'
@@ -80,7 +83,7 @@ Route::post('/modif_Commande/{id}',[
     'as'   => 'modif_Commande',
     'uses' => 'CommandeController@updateCommande'
 ]);
-Route::get('/supp_Commande/{id}',[
+Route::post('/supp_Commande',[
     'as'   => 'supp_Commande',
     'uses' => 'CommandeController@destroyCommande'
 ]);
@@ -111,7 +114,32 @@ Route::get('/supp_Profil/{id}',[
     'uses' => 'ProfilController@destroyProfil'
 ]);
 // -------------------------------------Fin Profils Route----------------------------
-// ----------------------------------------Users Route----------------------------
+// ----------------------------------------Ventes Route-------------------------------
+Route::get('/ventes','VenteController@indexVente')->name('ventes');
+Route::get('/detailsVente','VenteController@detailVente')->name('detailsVente');
+Route::get('/vente_Entre_Date','VenteController@selectVente')->name('vente_Entre_Date');
+Route::get('/addVente','VenteController@createVente')->name('addVente');
+Route::post('/storeVente','VenteController@storeVente')->name('storeVente');
+Route::get('/editVente/{id}','VenteController@editVente')->name('editVente');
+Route::post('/modifVente/{id}','VenteController@updateVente')->name('modifVente');
+Route::get('/suppVente/{id}','VenteController@destroyVente')->name('suppVente');
+Route::get('/avendre/{id}','VenteController@aVendreJson')->name('avendre');
+// -------------------------------------Fin Ventes Route------------------------------
+// -------------------------------Categorie Profils Route----------------------------
+Route::get('/categorie_profil','CategorieProfilController@indexCategorieProf')->name('categorie_profil');
+Route::get('/addCategorie_profil','CategorieProfilController@createCategorieProf')->name('addCategorie_profil');
+Route::post('/storeCategorie_profil','CategorieProfilController@storeCategorieProf')->name('storeCategorie_profil');
+Route::get('/editCategorie_profil/{id}','CategorieProfilController@editCategorieProf')->name('editCategorie_profil');
+Route::post('/modifCategorie_profil/{id}','CategorieProfilController@updateCategorieProf')->name('modifCategorie_profil');
+Route::get('/suppCategorie_profil/{id}','CategorieProfilController@destroyCategorieProf')->name('suppCategorie_profil');
+// ---------------------Fin Categorie Profils Route----------------------------------
+// ----------------------------------------Users Route-------------------------------
+Route::get('/users','UserController@indexUser')->name('users');
+Route::get('/addUser','UserController@createUser')->name('addUser');
+Route::post('/storeUser','UserController@storeUser')->name('storeUser');
+Route::get('/edit_user/{id}','UserController@editUser')->name('edit_user');
+Route::post('/modif_user/{id}','UserController@updateUser')->name('modif_user');
+Route::get('/supp_user/{id}','UserController@destroyUser')->name('supp_user');
 // -------------------------------------Fin Users Route----------------------------
 // ----------------------------------------Pubs Route----------------------------
 Route::get('/pubs',[
@@ -144,3 +172,7 @@ Route::get('/destroyPub/{id}',[
 ]);
 // -------------------------------------Fin Pubs Route----------------------------
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -167,11 +167,15 @@
     /* background-origin: border-box; */
     background-clip: content-box, border-box;
 }
+.btnBorder{
+    border-color: #cacae0;
+}
 .successValidate{
     height : 40px; 
     text-align : center;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 18px;
+    font-size: 16px;
+
 }
 .textLogo{
     color: white;

@@ -38,24 +38,23 @@ class ProfilController extends Controller
     {
         
         $request->validate([ 
-                'Nom' => 'required',
+                'nom' => 'required',
             ],
             [
                 'required'  => 'Le :attribute ne doit pas être vide.',
             ]
         );
-        $name = $request->input('name');
+        $name = $request->input('nom');
 
         $profil = new Profil();
         $profil->name = $name;
-        dd($profil);
         $profil->save();
 
-        return redirect('profils')->with('message','Profil enrégistré avec succès !!!');
+        return redirect('profils')->with('messageAdd','Profil enrégistré avec succès !!!');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource. 
      *
      * @param  \App\Profil  $profil
      * @return \Illuminate\Http\Response
@@ -93,7 +92,7 @@ class ProfilController extends Controller
         $profil->name = $name;
         $profil->update();
 
-        return redirect('/profils');
+        return redirect('/profils')->with('messageUpdate','Profil modifié avec succès !!!');
     }
 
     /**
@@ -105,9 +104,8 @@ class ProfilController extends Controller
     public function destroyProfil(Profil $profil, $id)
     {
         $profil = Profil::find($id);
-        dd($profil);
         $profil->delete();
 
-        return redirect('/profils');
+        return redirect('/profils')->with('messageDelete','Profil supprimé avec succès !!!');
     }
 }

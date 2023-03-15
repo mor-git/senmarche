@@ -49,11 +49,11 @@ class CategorieController extends Controller
         // dd($categorie);
         $categorie->save();
 
-        return redirect('/categories')->with('message','Catégorie enrégistrée avec succès !!!');
+        return redirect('/categories')->with('messageAdd','Catégorie enrégistrée avec succès !!!');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource. 
      *
      * @param  \App\Categorie  $categorie
      * @return \Illuminate\Http\Response
@@ -91,20 +91,19 @@ class CategorieController extends Controller
         $categorie->name = $name;
         $categorie->update();
 
-        return redirect('/categories'); 
+        return redirect('/categories')->with('messageUpdate','Catégorie modifiée avec succès !!!'); 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Categorie  $categorie
+     * @param  \App\Categorie  $categorie 
      * @return \Illuminate\Http\Response
      */
     public function destroyCategorie(Categorie $categorie, $id)
     {
         $categorie = Categorie::find($id);
-        // dd($categorie);
         $categorie->delete();
-        return redirect('/categories');
+        return redirect('/categories')->with('messageDelete','Catégorie supprimée avec succès !!!');
     }
 }

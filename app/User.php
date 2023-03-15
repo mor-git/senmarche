@@ -13,6 +13,9 @@ class User extends Authenticatable
     public function profils(){
         return $this->belongsTo('App\Profil','profil_id');
     }
+    public function categorieProfils(){
+        return $this->belongsTo('App\CategorieProfil','categorieProfil');
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'profil_id',
     ];
 
     /**
@@ -40,4 +43,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Pour la redirection
+
+    public function isAdmin() {
+        return $this->profil_id === 1;
+     }
+     public function isUser() {
+        return $this->profil_id === 2;
+     }
 }

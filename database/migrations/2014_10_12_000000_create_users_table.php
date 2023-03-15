@@ -27,6 +27,12 @@ class CreateUsersTable extends Migration
                 ->on('profils')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->integer('categorieProfil')->unsigned();
+            $table->foreign('categorieProfil')
+                ->references('id')
+                ->on('categorie_profils')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

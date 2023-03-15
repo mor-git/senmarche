@@ -47,7 +47,7 @@
                                 </div> -->
                                 <input type="hidden" value="{{ $pub->chemin }}" name="image" />
                                 <div class="form-group row">
-                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Libelle Pub</label>
+                                    <label class="col-12 col-sm-3 col-form-label text-sm-right">Nom Pub</label>
                                     <div class="col-12 col-md-5">
                                         <input required="" name="libele" type="text"  value="{{ $pub->libele }}" class="form-control">
                                     </div>

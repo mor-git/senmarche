@@ -1,3 +1,4 @@
+<!-- <php dd($produits); ?>  -->
 @extends('layouts.layout')
 @section('contenu')
 <!-- ============================================================== -->
@@ -7,27 +8,26 @@
     <div class="dashboard-ecommerce">
         <div class="container-fluid dashboard-content ">
             <!-- =======================Debut Modal ======================================= -->
-
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
-            </button>
-
-            <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ url('supp_Produit') }}" method="POST">
+                        <input type="hidden" value="{{csrf_token()}}" name="_token" id="token" />
+                        <div class="modal-body">
+                            <input type="hidden" name="deleteProd" id="valInput"/>
+                            <p>Etes-vous sûr de vouloir supprimer ce produit !!!</p> 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary deleteProduit">Supprimer</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             </div>
@@ -59,8 +59,12 @@
             <!-- ============================================================== -->
             <!-- recent orders  -->
             <!-- ============================================================== -->
-            @if(session('message'))
-                <div class="alert-success successValidate" role="alert">{{ session('message') }}</div>
+            @if(session('messageAdd'))
+                <div class="alert-success successValidate">{{ session('messageAdd') }}</div>
+            @elseif(session('messageUpdate'))
+                <div class="alert-success successValidate">{{ session('messageUpdate') }}</div>
+            @elseif(session('messageDelete'))
+                <div class="alert-danger successValidate">{{ session('messageDelete') }}</div>
             @endif
             <br>
             <div style="text-align : right; margin-right : 12px;"><a href="{{ url('/addProduit')}}" class="btn btn-outline-success">Nouveau Produit</a></div><br>
@@ -82,6 +86,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                               
                                 <?php $i=1; ?> 
                                 @foreach($produits as $produit)
                                     <tr>
@@ -89,19 +94,21 @@
                                         <td><img class="taille" src="{{ asset('assets/images/'.$produit->legende) }}"/></td>
                                         <!-- <td>{{ $produit->categories->name }}</td> -->
                                         <td>{{ $produit->name }}</td>
-                                        <td>{{ $produit->prix }}&nbsp;f</td> 
+                                        <td id="valInput">{{ $produit->prix }}&nbsp;f</td> 
                                         @if($produit->statut == 0 )
                                             <td style="color: red">Indisponible</td>
                                         @else
                                             <td style="color: green">Disponible</td>
                                         @endif
                                         <td>
+                                            <!-- <input type="hidden" value="{{ $produit->id }}" id="input"> -->
                                             <a href="{{ url('edit_Produit',$produit->id) }}">
-                                                <i class='fas fa-edit' style='font-size:15px;color:green;'></i>
+                                                <button class="btnBorder"><i class='fas fa-edit' style='font-size:15px;color:green;'></i></button>
                                             </a>&nbsp;
                                             <!-- <a href="{{ url('supp_Produit',$produit->id) }}"> -->
-                                            <a href=""  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <i class='fas fa-trash-alt' style='font-size:15px;color:red' ></i>
+ 
+                                            <a href=""  data-toggle="modal" data-target="#exampleModal">    
+                                                <button class="lien btnBorder" value="{{ $produit->id }}"><i class='fas fa-trash-alt' style='font-size:15px;color:red'></i></button>
                                             </a>
                                         </td>
                                     </tr>
@@ -124,15 +131,6 @@
             <!-- ============================================================== -->
             <!-- end recent orders  -->
             <!-- ============================================================== -->
-
-            <!-- =======================Debut Modal ======================================= -->
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
-            </button>
-
-            
-            <!-- ======================= Fin Modal ======================================= -->
         </div>
     </div>
 <!-- ============================================================== -->
@@ -144,14 +142,18 @@
 <!-- ============================================================== -->
 @endsection
 @section('script')
-    <script>
-        $(document).ready(function(){
-            $('#exampleModal').click(function(e){
-                e.preventDefault();
-
-                // $(.deleteModalBtn)
-            })
-        });
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        
+        $('.lien').click(function(){
+            let id = $(this).val();
+            $('#valInput').val(id);
+            
+        })
+        // $('.deleteProduit').click(function(){
+        // })
+    });
+</script>
 @endsection
     

@@ -49,8 +49,8 @@
                             <div class="form-group row">
                                 <label class="col-12 col-sm-3 col-form-label text-sm-right">Nom Profil</label>
                                 <div class="col-12 col-sm-9 col-lg-6">
-                                    <input type="text" name="Nom" required="" data-parsley-maxlength="6" placeholder="Ajout d'un Profil." class="form-control">
-                                    @error('Nom')
+                                    <input type="text" name="nom" required="" data-parsley-maxlength="6" placeholder="Ajout d'un Profil." class="form-control">
+                                    @error('nom')
                                     <div class="alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
